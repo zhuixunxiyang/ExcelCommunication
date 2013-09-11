@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+
+	<application>
+		<variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+	</application>
+
+	<managed-bean>
+		<managed-bean-name>loginBean</managed-bean-name>
+		<managed-bean-class>jsf.bean.LoginBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>userDAO</property-name>
+			<value>#{UserDAO}</value>
+		</managed-property>
+	</managed-bean>
+	<navigation-rule>
+		<from-view-id>/login.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>succeed</from-outcome>
+			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>fail</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<managed-bean>
+		<managed-bean-name>logoutBean</managed-bean-name>
+		<managed-bean-class>jsf.bean.LogoutBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<navigation-rule>
+		<from-view-id>/index.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>succeed</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>fail</from-outcome>
+			<to-view-id>/index.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<managed-bean>
+		<managed-bean-name>userBean</managed-bean-name>
+		<managed-bean-class>jsf.bean.UserBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>userDAO</property-name>
+			<value>#{UserDAO}</value>
+		</managed-property>
+	</managed-bean>
+	<navigation-rule>
+		<from-view-id>/index.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>userImported</from-outcome>
+			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+
+	</navigation-rule>
+</faces-config>
